@@ -1,3 +1,4 @@
+#pragma once
 #include <atomic>
 #include <vector>
 #include <cstdlib>
@@ -7,9 +8,8 @@
 template<typename T> requires std::is_trivially_copy_assignable_v<T> && std::is_trivially_destructible_v<T>
 class FixedSizeLockFreeQueue {
 public:
-    explicit FixedSizeLockFreeQueue(std::int64_t size) :
-            size_(size), start_protected_(0), start_(0), processing_(0),
-            commited_(-1) {
+    explicit FixedSizeLockFreeQueue(std::int64_t size) : size_(size), start_protected_(0), start_(0), processing_(0),
+                                                         commited_(-1) {
         data_ = static_cast<T *>(malloc(size_ * sizeof(T)));
     }
 
